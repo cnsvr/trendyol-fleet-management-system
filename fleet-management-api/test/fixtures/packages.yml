@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  barcode: AC100
+  state: 1
+  delivery_point_id: 1
+  bag: 
+  volumetric_weight: 1
+
+two:
+  barcode: AC101
+  state: 1
+  delivery_point_id: 1 
+  bag: 
+  volumetric_weight: 1
