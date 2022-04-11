@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/', to: 'home#index'
   resources :vehicles
   resources :packages
   resources :delivery_points
