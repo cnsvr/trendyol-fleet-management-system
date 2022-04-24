@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PackagesController < ApplicationController
-  before_action :set_package, only: [:show, :update, :destroy]
+  before_action :set_package, only: %i[show update destroy]
 
   # GET /packages
   def index
@@ -42,35 +44,34 @@ class PackagesController < ApplicationController
     package = Package.find_by(barcode: add_package_to_bag_params[:barcode])
     bag = Bag.find_by(barcode: add_package_to_bag_params[:bag_barcode])
     if package.nil?
-      render json: {error: "Package not found"}, status: :not_found
+      render json: { error: 'Package not found' }, status: :not_found
     elsif bag.nil?
-      render json: {error: "Bag not found"}, status: :not_found
-    else
-      if package.delivery_point_id == bag.delivery_point_id
-        package.transaction do
-          package.bag_id = bag.id
-          package.state = 2 # loaded into bag
-          package.save
-        end
-        render json: package
-      else
-        render json: {error: "Package and bag must be in the same delivery point"}, status: :unprocessable_entity
+      render json: { error: 'Bag not found' }, status: :not_found
+    elsif package.delivery_point_id == bag.delivery_point_id
+      package.transaction do
+        package.bag_id = bag.id
+        package.state = 2 # loaded into bag
+        package.save
       end
+      render json: package
+    else
+      render json: { error: 'Package and bag must be in the same delivery point' }, status: :unprocessable_entity
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_package
-      @package = Package.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def package_params
-      params.require(:package).permit(:barcode, :state, :delivery_point_id, :bag_id, :volumetric_weight)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_package
+    @package = Package.find(params[:id])
+  end
 
-    def add_package_to_bag_params
-      params.require(:add_package_to_bag).permit(:barcode, :bag_barcode)
-    end
+  # Only allow a list of trusted parameters through.
+  def package_params
+    params.require(:package).permit(:barcode, :state, :delivery_point_id, :bag_id, :volumetric_weight)
+  end
+
+  def add_package_to_bag_params
+    params.require(:add_package_to_bag).permit(:barcode, :bag_barcode)
+  end
 end

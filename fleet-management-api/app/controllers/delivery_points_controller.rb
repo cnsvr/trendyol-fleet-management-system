@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class DeliveryPointsController < ApplicationController
-  before_action :set_delivery_point, only: [:show, :update, :destroy]
+  before_action :set_delivery_point, only: %i[show update destroy]
 
   # GET /delivery_points
   def index
@@ -39,13 +41,14 @@ class DeliveryPointsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_delivery_point
-      @delivery_point = DeliveryPoint.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def delivery_point_params
-      params.require(:delivery_point).permit(:delivery_point, :value)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_delivery_point
+    @delivery_point = DeliveryPoint.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def delivery_point_params
+    params.require(:delivery_point).permit(:delivery_point, :value)
+  end
 end

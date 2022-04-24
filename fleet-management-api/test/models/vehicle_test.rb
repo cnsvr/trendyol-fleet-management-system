@@ -1,4 +1,6 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class VehicleTest < ActiveSupport::TestCase
   test 'should not save vehicle without plate number' do

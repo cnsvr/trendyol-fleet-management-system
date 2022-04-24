@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class BagsController < ApplicationController
-  before_action :set_bag, only: [:show, :update, :destroy]
+  before_action :set_bag, only: %i[show update destroy]
 
   # GET /bags
   def index
@@ -39,13 +41,14 @@ class BagsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bag
-      @bag = Bag.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def bag_params
-      params.require(:bag).permit(:barcode, :status, :delivery_point_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bag
+    @bag = Bag.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def bag_params
+    params.require(:bag).permit(:barcode, :status, :delivery_point_id)
+  end
 end

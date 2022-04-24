@@ -1,9 +1,11 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class PackageTest < ActiveSupport::TestCase
   test 'should not save package without barcode' do
     package = Package.new
-    
+
     assert_not package.save, 'Saved the package without a barcode'
   end
 
@@ -11,18 +13,18 @@ class PackageTest < ActiveSupport::TestCase
     package = Package.last
     new_package = Package.new(barcode: package.barcode)
     new_package.valid?
-    assert_equal ["has already been taken"], new_package.errors[:barcode]
+    assert_equal ['has already been taken'], new_package.errors[:barcode]
   end
 
   test 'should not save package without delivery point' do
     package = Package.new(barcode: 'AC102')
-    
+
     assert_not package.save, 'Saved the package without a delivery point'
   end
 
   test 'should not save package without volumetric weight' do
     package = Package.new(barcode: 'AC102', delivery_point_id: 1)
-    
+
     assert_not package.save, 'Saved the package without a volumetric weight'
   end
 
@@ -63,7 +65,7 @@ class PackageTest < ActiveSupport::TestCase
       package.load
 
       assert_equal package.state, 3, 'Package state is not loaded'
-      assert_not package.unload("Invalid Type"), 'Unloaded the package'
+      assert_not package.unload('Invalid Type'), 'Unloaded the package'
       assert_equal package.state, 3, 'Package state is not loaded'
     end
 

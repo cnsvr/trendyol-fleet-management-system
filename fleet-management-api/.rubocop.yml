@@ -1,0 +1,8 @@
+AllCops:
+  NewCops: enable
+Style/Documentation:
+  Enabled: false
+Metrics/ClassLength:
+  Max: 150
+Metrics/BlockLength:
+  Max: 150
