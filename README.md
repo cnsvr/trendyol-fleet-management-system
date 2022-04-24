@@ -6,11 +6,11 @@ This is a small-scale fleet management system where
  and unloaded at delivery points: Package and Bag. Vehicles have license plates registered in the system. 
 
  The system includes three different delivery points.
-Branch: Only package-type shipments can be unloaded. Bags and packages in bags
+- Branch: Only package-type shipments can be unloaded. Bags and packages in bags
 may not be unloaded.
-Distribution Center: Bags, packages in bags and packages not assigned to any bags
+- Distribution Center: Bags, packages in bags and packages not assigned to any bags
 may be unloaded.
-Transfer Center: Only bags and packages in bags may be unloaded.
+- Transfer Center: Only bags and packages in bags may be unloaded.
 
 Vehicles must go to their assigned delivery points and ensure that the relevant
  shipments are unloaded at the relevant delivery points.
@@ -28,6 +28,7 @@ To run in local environment, follow the steps:
  - brew install postgresql
  - git clone https://github.com/cnsvr/trendyol-fleet-management-system
  - cd https://github.com/cnsvr/trendyol-fleet-management-system/fleet-management-api
+ - bundle install
  - rails db:create
  - rails db:migrate
  - rails server
